@@ -3,7 +3,7 @@ function getComputerChoise() {
 }
 
 function getHumanChoice() {
-    let getHumaenAnswer = prompt("Введите свой выбор ответа. Привет - ножницы,бумага,камень. Всего 5 итераций.")
+    let getHumaenAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.")
     getHumaenAnswer = getHumaenAnswer.toLowerCase()
     if (getHumaenAnswer == "ножницы" || getHumaenAnswer == "бумага" || getHumaenAnswer == "камень") {
         return getHumaenAnswer
