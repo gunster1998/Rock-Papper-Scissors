@@ -31,14 +31,14 @@ function playRound() {
         humenChoise == "камень" && computerChoise == "бумага") {
         humenScore--;
         computerScore++
-        console.log("Вас унизил компьютер, ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " очков")
-        alert("Вас унизил компьютер, ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " очков")
+        console.log("Вас унизил компьютер, ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " ")
+        alert("Вас унизил компьютер, ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " ")
     }
     else {
         humenScore++
         computerScore--
-        console.log("Вы добавили себе очко ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " очков")
-        alert("Вы добавили себе очко ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " очков")
+        console.log("Вы добавили себе очко ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " ")
+        alert("Вы добавили себе очко ваш счет: " + humenScore + " и счет компьютера: " + computerScore + " ")
     }
 }
 
@@ -47,12 +47,14 @@ function playGame() {
         playRound()
     }
     if (humenScore > computerScore) {
-        alert("Вы победили ваш счет:" + humenScore + " и счет компьютера: " + computerScore + " очков")
+        alert("Вы победили ваш счет:" + humenScore + " и счет компьютера: " + computerScore + " ")
     }
     else {
-        alert("Вы проиграли ваш счет:" + humenScore + " и счет компьютера: " + computerScore + " очков")
+        alert("Вы проиграли ваш счет:" + humenScore + " и счет компьютера: " + computerScore + " ")
     }
     if (confirm("Вы хотите еще раз поиграть ")) {
+        humenScore = 0;
+        computerScore = 0;
         playGame();
     }
     else {
