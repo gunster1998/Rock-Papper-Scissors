@@ -1,44 +1,49 @@
-function getComputerChoise() {
-    const arrayObjectGame = ["ножницы", "бумага", "камень"]
-    return arrayObjectGame[Math.floor(Math.random() * 3)]
-}
 
-function getHumanChoice() {
-    let getHumanAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.")
-    getHumanAnswer = getHumanAnswer.toLowerCase()
-    if (getHumanAnswer == "ножницы" || getHumanAnswer == "бумага" || getHumanAnswer == "камень") {
-        return getHumanAnswer
-    }
-    else {
-        alert("Вы ввели не валидные данные")
-        return getHumanChoice()
-    }
 
-}
-
-function playRound() {
-    const winsChoice = {
-        "бумага" : ["камень"],
-        "ножницы" : ["бумага"],
-        "камень" : ["ножницы"]
-    }
-    let humanChoise = getHumanChoice()
-    let computerChoise = getComputerChoise()
-    if (humanChoise == computerChoise) {
-        alert("Ничья!")
-        return ""
-    }
-    if (winsChoice[humanChoise].includes(computerChoise)) {
-        return "humanWin"
-    }
-    else {
-        return "computerWin" 
-    }
-}
 
 function playGame() {
+
     let humanScore = 0;
     let computerScore = 0;
+
+    function getComputerChoise() {
+        const arrayObjectGame = ["ножницы", "бумага", "камень"]
+        return arrayObjectGame[Math.floor(Math.random() * 3)]
+    }
+    
+    function getHumanChoice() {
+        let getHumanAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.")
+        getHumanAnswer =  getHumanAnswer?.toLowerCase()?? ""
+        if (getHumanAnswer == "ножницы" || getHumanAnswer == "бумага" || getHumanAnswer == "камень") {
+            return getHumanAnswer
+        }
+        else {
+            alert("Вы ввели не валидные данные")
+            return getHumanChoice()
+        }
+    
+    }
+
+    function playRound() {
+        const winsChoice = {
+            "бумага" : ["камень"],
+            "ножницы" : ["бумага"],
+            "камень" : ["ножницы"]
+        }
+        let humanChoise = getHumanChoice()
+        let computerChoise = getComputerChoise()
+        if (humanChoise == computerChoise) {
+            alert("Ничья!")
+            return ""
+        }
+        if (winsChoice[humanChoise].includes(computerChoise)) {
+            return "humanWin"
+        }
+        else {
+            return "computerWin" 
+        }
+    }
+    
     for (let i = 0; i < 5; i++) {
          const getResultWin = playRound()
          if (getResultWin == "humanWin") {
