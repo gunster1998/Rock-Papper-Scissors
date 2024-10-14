@@ -7,24 +7,23 @@ const resultDiv = document.querySelector('.result')
 const buttonEnd = document.createElement('button');
 buttonEnd.id = 'buttonEnd';
 buttonEnd.innerText = 'Поиграть еще раз!';
-
-
+resultDiv.appendChild(buttonEnd)
+buttonEnd.style.display = 'none'; 
 
 let humanScore = 0;
 let computerScore = 0;
 let roundCount = 5;
 let roundNumber = 0;
+
 function newGame() {
     roundNumber = 0;
     humanScore = 0;
     computerScore = 0;
     resultInfo.innerText = ''; 
-    buttonEnd.style.display = 'none'; // Скрываем кнопку перезапуска
+    buttonEnd.style.display = 'none'; 
 }
 
-
 function playRound(humanChoise) {
-
 
     function getComputerChoise() {
         const arrayObjectGame = ["ножницы", "бумага", "камень"];
@@ -55,7 +54,7 @@ function playRound(humanChoise) {
         };
 
     } else {
-        resultDiv.appendChild(buttonEnd)
+        buttonEnd.style.display = 'block'; 
         if (humanScore > computerScore) {
             resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
          }
