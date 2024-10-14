@@ -1,8 +1,8 @@
 
-function playGame() {
-
+function playGame(roundCount) {
     let humanScore = 0;
     let computerScore = 0;
+    roundCount = roundCount + Infinity
 
     function getComputerChoise() {
         const arrayObjectGame = ["ножницы", "бумага", "камень"];
@@ -10,7 +10,7 @@ function playGame() {
     };
     
     function getHumanChoice() {
-        let getHumanAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.")
+        let getHumanAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень.")
         getHumanAnswer = getHumanAnswer ?.toLowerCase() ?? ""
         if (getHumanAnswer == "ножницы" || getHumanAnswer == "бумага" || getHumanAnswer == "камень") {
             return getHumanAnswer;
@@ -40,7 +40,7 @@ function playGame() {
         };
     };
     
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < roundCount; i++) {
          const getResultWin = playRound();
          if (getResultWin == "humanWin") {
             humanScore++;
