@@ -21,8 +21,7 @@ function buttonEnd() {
         buttonEnd.addEventListener('click', () => newGame());
     }
 
-    buttonEnd.style.display = 'block'
-
+    buttonEnd.style.display = 'block';
 }
 
 
@@ -37,8 +36,19 @@ function newGame() {
     }
 }
 
-function playRound(humanChoise) {
+function lastAction() {
+    buttonEnd()
+    const buttonEndElement = document.getElementById('buttonEnd'); 
+    if (humanScore > computerScore) {
+        resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+     }
+     else {
+        resultInfo.innerText = `Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+     };
+}
 
+function playRound(humanChoise) {
+    roundNumber++
     function getComputerChoise() {
         const arrayObjectGame = ["ножницы", "бумага", "камень"];
         return arrayObjectGame[Math.floor(Math.random() * 3)];
@@ -52,12 +62,12 @@ function playRound(humanChoise) {
 
     let computerChoise = getComputerChoise();
 
-    if (roundNumber < roundCount){
-        roundNumber++
+
+    if (roundNumber <= roundCount){
+
         if (humanChoise == computerChoise) {
             resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
         };
-
         if (winsChoice[humanChoise].includes(computerChoise)) {
             humanScore++;
             resultInfo.innerText = `Вы выйграли этот раунд ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
@@ -66,16 +76,8 @@ function playRound(humanChoise) {
             computerScore++;
             resultInfo.innerText = `Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
         };
-
-    } else {
-        buttonEnd()
-        const buttonEndElement = document.getElementById('buttonEnd'); 
-        if (humanScore > computerScore) {
-            resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-         }
-         else {
-            resultInfo.innerText = `Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-         };
+    } else if (roundNumber == roundCount){
+        lastAction() 
     }
     
 };
