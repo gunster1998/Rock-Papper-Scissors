@@ -3,24 +3,38 @@ const paperButton = document.getElementById('paper');
 const scissorsButton = document.getElementById('scissors');
 const resultInfo = document.querySelector('.resultInfo');
 const count = document.querySelector('.count');
-const resultDiv = document.querySelector('.result')
-const buttonEnd = document.createElement('button');
-buttonEnd.id = 'buttonEnd';
-buttonEnd.innerText = 'Поиграть еще раз!';
-resultDiv.appendChild(buttonEnd)
-buttonEnd.style.display = 'none'; 
+const resultDiv = document.querySelector('.result');
 
 let humanScore = 0;
 let computerScore = 0;
 let roundCount = 5;
 let roundNumber = 0;
 
+function buttonEnd() {
+    let buttonEnd = document.getElementById('buttonEnd');
+
+    if (!buttonEnd) {
+        const buttonEnd = document.createElement('button');
+        buttonEnd.id = 'buttonEnd';
+        buttonEnd.innerText = 'Поиграть еще раз!';
+        resultDiv.appendChild(buttonEnd);
+        buttonEnd.addEventListener('click', () => newGame());
+    }
+
+    buttonEnd.style.display = 'block'
+
+}
+
+
 function newGame() {
     roundNumber = 0;
     humanScore = 0;
     computerScore = 0;
     resultInfo.innerText = ''; 
-    buttonEnd.style.display = 'none'; 
+    const buttonEnd = document.getElementById('buttonEnd')
+    if (buttonEnd) {
+        buttonEnd.style.display = 'none'; 
+    }
 }
 
 function playRound(humanChoise) {
@@ -28,13 +42,13 @@ function playRound(humanChoise) {
     function getComputerChoise() {
         const arrayObjectGame = ["ножницы", "бумага", "камень"];
         return arrayObjectGame[Math.floor(Math.random() * 3)];
-    };
+    }
 
     const winsChoice = {
         "бумага" : ["камень"],
         "ножницы" : ["бумага"],
         "камень" : ["ножницы"]
-    };
+    }
 
     let computerChoise = getComputerChoise();
 
@@ -54,7 +68,8 @@ function playRound(humanChoise) {
         };
 
     } else {
-        buttonEnd.style.display = 'block'; 
+        buttonEnd()
+        const buttonEndElement = document.getElementById('buttonEnd'); 
         if (humanScore > computerScore) {
             resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
          }
@@ -71,7 +86,6 @@ paperButton.addEventListener('click', () => playRound('бумага'));
 
 scissorsButton.addEventListener('click', () => playRound('ножницы'));
 
-buttonEnd.addEventListener('click', () => newGame());
 
 
 
