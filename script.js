@@ -40,11 +40,12 @@ function lastAction() {
     const buttonEndElement = document.getElementById('buttonEnd'); 
     if (humanScore > computerScore) {
         resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-     }
-     else {
+     } else if (humanScore < computerScore) {
         resultInfo.innerText = `Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-     };
-}
+     } else {
+        resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+     }
+} 
 
 function playRound(humanChoise) {
     roundNumber++
@@ -60,7 +61,6 @@ function playRound(humanChoise) {
     }
 
     let computerChoise = getComputerChoise();
-
 
     if (roundNumber <=  roundCount){
         if (humanChoise == computerChoise) {
