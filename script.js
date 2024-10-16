@@ -11,7 +11,7 @@ let roundCount = 5;
 let roundNumber = 0;
 
 function buttonEnd() {
-    let buttonEnd = document.getElementById('buttonEnd')
+    let buttonEnd = document.getElementById('buttonEnd');
     if (!buttonEnd) {
         const buttonEnd = document.createElement('button');
         buttonEnd.id = 'buttonEnd';
@@ -64,14 +64,14 @@ function playRound(humanChoise) {
 
     if (roundNumber <=  roundCount){
         if (humanChoise == computerChoise) {
-            return 'draw'
+            return 'draw';
         };
         if (winsChoice[humanChoise].includes(computerChoise)) {
             humanScore++;
-            return 'winHuman'
+            return 'winHuman';
         } else {
             computerScore++;
-            return 'winComputer'
+            return 'winComputer';
         };
     }
     
