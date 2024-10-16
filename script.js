@@ -10,7 +10,7 @@ let computerScore = 0;
 let roundCount = 5;
 let roundNumber = 0;
 
-function buttonEnd() {
+function createEndButton() {
     let buttonEnd = document.getElementById('buttonEnd');
     if (!buttonEnd) {
         const buttonEnd = document.createElement('button');
@@ -29,52 +29,54 @@ function newGame() {
     humanScore = 0;
     computerScore = 0;
     resultInfo.innerText = ''; 
-    const buttonEnd = document.getElementById('buttonEnd')
+    const buttonEnd = document.getElementById('buttonEnd');
     if (buttonEnd) {
         buttonEnd.style.display = 'none'; 
     }
 }
 
 function lastAction() {
-    buttonEnd()
-    const buttonEndElement = document.getElementById('buttonEnd'); 
+    createEndButton();
     if (humanScore > computerScore) {
         resultInfo.innerText = `Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-     } else if (humanScore < computerScore) {
+        return
+    } 
+
+    if (humanScore < computerScore) {
         resultInfo.innerText = `Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-     } else {
+        return
+     } 
         resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-     }
 } 
 
 function playRound(humanChoise) {
-    roundNumber++
+    roundNumber++;
     function getComputerChoise() {
-        const arrayObjectGame = ["ножницы", "бумага", "камень"];
+        const arrayObjectGame = ['ножницы', 'бумага', 'камень'];
         return arrayObjectGame[Math.floor(Math.random() * 3)];
     }
 
     const winsChoice = {
-        "бумага" : ["камень"],
-        "ножницы" : ["бумага"],
-        "камень" : ["ножницы"]
+        'бумага' : ['камень'],
+        'ножницы' : ['бумага'],
+        'камень' : ['ножницы']
     }
 
     let computerChoise = getComputerChoise();
 
-    if (roundNumber <=  roundCount){
-        if (humanChoise == computerChoise) {
-            return 'draw';
-        };
-        if (winsChoice[humanChoise].includes(computerChoise)) {
-            humanScore++;
-            return 'winHuman';
-        } else {
-            computerScore++;
-            return 'winComputer';
-        };
+    if (roundNumber >  roundCount){
+        return
     }
-    
+    if (humanChoise == computerChoise) {
+        return 'draw';
+    };
+    if (winsChoice[humanChoise].includes(computerChoise)) {
+        humanScore++;
+        return 'winHuman';
+    } 
+    computerScore++;
+    return 'winComputer';
+
 };
 
 function updateDom(choice) {
@@ -85,12 +87,16 @@ function updateDom(choice) {
         return;
     }
     
-    if (winner === 'draw') {
-        resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-    } else if (winner === 'winHuman') {
-        resultInfo.innerText = `Вы выйграли этот раунд ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-    } else {
-        resultInfo.innerText = `Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+
+    switch(winner){
+        case 'draw':
+            resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+            break
+        case 'winHuman':
+            resultInfo.innerText = `Вы выйграли этот раунд ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+            break
+        default:
+            resultInfo.innerText = `Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
     }
 }
 
@@ -116,52 +122,52 @@ scissorsButton.addEventListener('click', () => updateDom('ножницы'));
 //     let computerScore = 0;
 
 //     function getComputerChoise() {
-//         const arrayObjectGame = ["ножницы", "бумага", "камень"];
+//         const arrayObjectGame = ['ножницы', 'бумага', 'камень'];
 //         return arrayObjectGame[Math.floor(Math.random() * 3)];
 //     };
     
 //     function getHumanChoice() {
-//         let getHumanAnswer = prompt("Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.")
-//         getHumanAnswer = getHumanAnswer ?.toLowerCase() ?? ""
-//         if (getHumanAnswer == "ножницы" || getHumanAnswer == "бумага" || getHumanAnswer == "камень") {
+//         let getHumanAnswer = prompt('Это игра камень,ножницы,бумага. Введите одно из трех слов - ножницы,бумага,камень. Всего 5 итераций.')
+//         getHumanAnswer = getHumanAnswer ?.toLowerCase() ?? ''
+//         if (getHumanAnswer == 'ножницы' || getHumanAnswer == 'бумага' || getHumanAnswer == 'камень') {
 //             return getHumanAnswer;
 //         }
 //         else {
-//             alert("Вы ввели не валидные данные!")
+//             alert('Вы ввели не валидные данные!')
 //             return getHumanChoice();
 //         };
 //     };
 
 //     function playRound() {
 //         const winsChoice = {
-//             "бумага" : ["камень"],
-//             "ножницы" : ["бумага"],
-//             "камень" : ["ножницы"]
+//             'бумага' : ['камень'],
+//             'ножницы' : ['бумага'],
+//             'камень' : ['ножницы']
 //         };
 //         let humanChoise = getHumanChoice();
 //         let computerChoise = getComputerChoise();
 //         if (humanChoise == computerChoise) {
-//             return "draw";
+//             return 'draw';
 //         };
 //         if (winsChoice[humanChoise].includes(computerChoise)) {
-//             return "humanWin";
+//             return 'humanWin';
 //         }
 //         else {
-//             return "computerWin" ;
+//             return 'computerWin' ;
 //         };
 //     };
     
 //     for (let i = 0; i < 5; i++) {
 //          const getResultWin = playRound();
-//          if (getResultWin == "humanWin") {
+//          if (getResultWin == 'humanWin') {
 //             humanScore++;
 //             alert(`Вы победили ваш счет: ${humanScore} и счет компьютера: ${computerScore}`);
 //          }
-//          else if (getResultWin == "computerWin") {
+//          else if (getResultWin == 'computerWin') {
 //             computerScore++;
 //             alert(`Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`);
 //          } 
-//          else if(getResultWin == "draw") {
+//          else if(getResultWin == 'draw') {
 //             alert(`Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`);
 //          };
 //     };
@@ -173,13 +179,13 @@ scissorsButton.addEventListener('click', () => updateDom('ножницы'));
 //         alert(`Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`);
 //     };
 
-//     if (confirm("Вы хотите еще раз поиграть?")) {
+//     if (confirm('Вы хотите еще раз поиграть?')) {
 //         humanScore = 0;
 //         computerScore = 0;
 //         playGame();
 //     }
 //     else {
-//         alert("Пока");
+//         alert('Пока');
 //     }
 // }
 
