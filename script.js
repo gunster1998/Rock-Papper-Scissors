@@ -46,7 +46,7 @@ function lastAction() {
         resultInfo.innerText = `Вы проиграли ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
         return
      } 
-        resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+    resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
 } 
 
 function playRound(humanChoise) {
@@ -69,7 +69,7 @@ function playRound(humanChoise) {
     }
     if (humanChoise == computerChoise) {
         return 'draw';
-    };
+    }
     if (winsChoice[humanChoise].includes(computerChoise)) {
         humanScore++;
         return 'winHuman';
@@ -87,7 +87,6 @@ function updateDom(choice) {
         return;
     }
     
-
     switch(winner){
         case 'draw':
             resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
