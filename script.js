@@ -1,9 +1,9 @@
 const rockButton = document.getElementById('rock');
 const paperButton = document.getElementById('paper');
 const scissorsButton = document.getElementById('scissors');
-const resultInfo = document.querySelector('.resultInfo');
 const count = document.querySelector('.count');
 const resultDiv = document.querySelector('.result');
+const resultInfo = document.querySelector('.resultInfo');
 
 let humanScore = 0;
 let computerScore = 0;
@@ -11,8 +11,7 @@ let roundCount = 5;
 let roundNumber = 0;
 
 function buttonEnd() {
-    let buttonEnd = document.getElementById('buttonEnd');
-
+    let buttonEnd = document.getElementById('buttonEnd')
     if (!buttonEnd) {
         const buttonEnd = document.createElement('button');
         buttonEnd.id = 'buttonEnd';
@@ -20,10 +19,10 @@ function buttonEnd() {
         resultDiv.appendChild(buttonEnd);
         buttonEnd.addEventListener('click', () => newGame());
     }
-
-    buttonEnd.style.display = 'block';
+    if (buttonEnd){
+        buttonEnd.style.display = 'block';
+    }
 }
-
 
 function newGame() {
     roundNumber = 0;
@@ -63,30 +62,44 @@ function playRound(humanChoise) {
     let computerChoise = getComputerChoise();
 
 
-    if (roundNumber <= roundCount){
-
+    if (roundNumber <=  roundCount){
         if (humanChoise == computerChoise) {
-            resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+            return 'draw'
         };
         if (winsChoice[humanChoise].includes(computerChoise)) {
             humanScore++;
-            resultInfo.innerText = `Вы выйграли этот раунд ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
-        }
-        else {
+            return 'winHuman'
+        } else {
             computerScore++;
-            resultInfo.innerText = `Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+            return 'winComputer'
         };
-    } else if (roundNumber == roundCount){
-        lastAction() 
     }
     
 };
 
-rockButton.addEventListener('click', () => playRound('камень'));
+function updateDom(choice) {
+    let winner =  playRound(choice);
 
-paperButton.addEventListener('click', () => playRound('бумага'));
+    if (roundNumber >= roundCount){
+        lastAction();
+        return;
+    }
+    
+    if (winner === 'draw') {
+        resultInfo.innerText = `Ничья ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+    } else if (winner === 'winHuman') {
+        resultInfo.innerText = `Вы выйграли этот раунд ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+    } else {
+        resultInfo.innerText = `Вас унизил компьютер, ваш счет: ${humanScore} и счет компьютера: ${computerScore}`;
+    }
+}
 
-scissorsButton.addEventListener('click', () => playRound('ножницы'));
+
+rockButton.addEventListener('click', () => updateDom('камень'));
+
+paperButton.addEventListener('click', () => updateDom('бумага'));
+
+scissorsButton.addEventListener('click', () => updateDom('ножницы'));
 
 
 
